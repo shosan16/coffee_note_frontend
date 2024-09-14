@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import { Button } from './components/ui/button';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HomePage } from './components/Home/HomePage';
+import { RecipeListPage } from './components/RecipeList/RecipeListPage';
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
-        <>
-            <h1 className="text-red-500">Coffee Note</h1>
-            <Button onClick={() => setCount((count) => count + 1)}>
-                count is {count}
-            </Button>
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+            </Routes>
+            <Routes>
+                <Route path="/recipes" element={<RecipeListPage />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
