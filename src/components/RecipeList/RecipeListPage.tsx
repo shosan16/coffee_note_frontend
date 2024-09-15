@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 export const RecipeListPage = () => {
     return (
         <div>
-            <div>Recipe List</div>
-            <Link to="/">Home</Link>
+            <h2>Recipe Listページです</h2>
+            <Link to="/">Homeページへ</Link>
         </div>
     );
 };
