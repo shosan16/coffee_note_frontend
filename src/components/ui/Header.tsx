@@ -3,15 +3,15 @@ import coffeeIcon from '@/assets/coffee_icon.svg';
 
 export const Header = () => {
     return (
-        <header className="bg-gray-300">
-            <div className="container mx-auto">
+        <header className="fixed top-0 left-0 right-0 bg-gray-300 z-10">
+            <div className="container mx-auto px-4">
                 <nav className="flex justify-between items-center py-4">
                     <NavLink
                         className="flex text-2xl font-bold space-x-2 items-center"
                         to="/"
                     >
-                        <img src={coffeeIcon} alt="Coffee icon" />
-                        <span className="text-gray-900">Coffee Note</span>
+                        <img src={coffeeIcon} />
+                        <span>Coffee Note</span>
                     </NavLink>
                     <ul className="flex space-x-5">
                         <li>

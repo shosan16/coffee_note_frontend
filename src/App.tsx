@@ -6,20 +6,22 @@ import { MyPage } from './components/Mypage/Mypage';
 
 function App() {
     return (
-        <>
-            <BrowserRouter>
+        <BrowserRouter>
+            <div className="min-h-screen">
                 <Header />
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                </Routes>
-                <Routes>
-                    <Route path="/recipes" element={<RecipeListPage />} />
-                </Routes>
-                <Routes>
-                    <Route path="/mypage" element={<MyPage />} />
-                </Routes>
-            </BrowserRouter>
-        </>
+                <main className="container mx-auto px-4 pt-20">
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                    </Routes>
+                    <Routes>
+                        <Route path="/recipes" element={<RecipeListPage />} />
+                    </Routes>
+                    <Routes>
+                        <Route path="/mypage" element={<MyPage />} />
+                    </Routes>
+                </main>
+            </div>
+        </BrowserRouter>
     );
 }
 
