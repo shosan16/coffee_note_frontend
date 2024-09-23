@@ -16,7 +16,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 
-import { ThumbsUp, Bookmark } from 'lucide-react';
+import { ThumbsUp, Bookmark, Bean, Droplet } from 'lucide-react';
 import { Badge } from '../ui/badge';
 
 interface RecipeStep {
@@ -59,11 +59,17 @@ export const CoffeeRecipeCard = ({
         <Card className="container m-auto">
             <CardHeader>
                 <CardTitle>{recipeName}</CardTitle>
-                <div className="bg-gray flex flex-row gap-3">
-                    <Badge>{'Beans: ' + beanWeight}</Badge>
-                    <Badge>{'Water: ' + totalWaterAmount}</Badge>
-                    <Badge>{grindSize}</Badge>
-                    <Badge>{roastLevel}</Badge>
+                <div className="flex flex-row gap-3">
+                    <Badge className="text-center">
+                        <Bean size={15} className="pr-1" />
+                        {beanWeight}
+                    </Badge>
+                    <Badge className="text-center">
+                        <Droplet size={15} className="pr-1" />
+                        {totalWaterAmount}
+                    </Badge>
+                    <Badge className="text-center">{grindSize}</Badge>
+                    <Badge className="text-center">{roastLevel}</Badge>
                 </div>
                 {description && (
                     <CardDescription>{description}</CardDescription>
@@ -73,14 +79,16 @@ export const CoffeeRecipeCard = ({
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Time</TableHead>
+                            <TableHead className="w-1/4">Time</TableHead>
                             <TableHead>Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {steps.map((step, index) => (
                             <TableRow key={index}>
-                                <TableCell>{step.time}</TableCell>
+                                <TableCell className="w-1/4">
+                                    {step.time}
+                                </TableCell>
                                 <TableCell>{step.action}</TableCell>
                             </TableRow>
                         ))}
