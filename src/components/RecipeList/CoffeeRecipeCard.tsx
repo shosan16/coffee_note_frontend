@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/table';
 
 import { ThumbsUp, Bookmark } from 'lucide-react';
+import { Badge } from '../ui/badge';
 
 interface RecipeStep {
     time: string;
@@ -27,12 +28,10 @@ interface CoffeeRecipe {
     id: string;
     recipeName: string;
     description?: string;
-    beanName?: string;
     beanWeight: string;
     roastLevel: string;
     grindSize: string;
     totalWaterAmount: string;
-    totalTime: string;
     steps: RecipeStep[];
     isLiked: boolean;
     isBookmarked: boolean;
@@ -46,6 +45,10 @@ interface CoffeeRecipeCardProps extends CoffeeRecipe {
 export const CoffeeRecipeCard = ({
     recipeName,
     description,
+    beanWeight,
+    roastLevel,
+    grindSize,
+    totalWaterAmount,
     steps,
     isLiked,
     isBookmarked,
@@ -56,6 +59,12 @@ export const CoffeeRecipeCard = ({
         <Card className="container m-auto">
             <CardHeader>
                 <CardTitle>{recipeName}</CardTitle>
+                <div className="bg-gray flex flex-row gap-3">
+                    <Badge>{'Beans: ' + beanWeight}</Badge>
+                    <Badge>{'Water: ' + totalWaterAmount}</Badge>
+                    <Badge>{grindSize}</Badge>
+                    <Badge>{roastLevel}</Badge>
+                </div>
                 {description && (
                     <CardDescription>{description}</CardDescription>
                 )}
@@ -78,7 +87,7 @@ export const CoffeeRecipeCard = ({
                     </TableBody>
                 </Table>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="mx-3 flex flex-row justify-end gap-5">
                 <button onClick={() => onLikeToggle()}>
                     <ThumbsUp
                         color="black"
