@@ -30,9 +30,9 @@ export const RecipeListPage = () => {
             description: 'A clean and flavorful brew method',
             beanName: 'Kenya',
             beanWeight: '15g',
-            grindSize: 'Medium grind',
+            grindSize: 'Medium',
             roastLevel: 'Dark',
-            totalWaterAmount: '360g f',
+            totalWaterAmount: '360g',
             totalTime: '3:30',
             steps: [
                 { time: '0:00', action: 'Add 60 g of hot water' },
@@ -51,8 +51,8 @@ export const RecipeListPage = () => {
             description: 'A clean and flavorful brew method',
             beanName: 'Kenya',
             beanWeight: '15g',
-            grindSize: 'Medium grind',
-            roastLevel: 'Dark',
+            grindSize: '中挽き',
+            roastLevel: '深煎り',
             totalWaterAmount: '360g',
             totalTime: '3:30',
             steps: [
