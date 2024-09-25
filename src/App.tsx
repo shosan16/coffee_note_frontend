@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './components/Home/HomePage';
 import { RecipeListPage } from './components/RecipeList/RecipeListPage';
-import { Header } from './components/ui/Header';
+import { Header } from './components/common/Header';
+import { NavigationBar } from './components/common/NavigationBar';
 import { MyPage } from './components/Mypage/Mypage';
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
         <BrowserRouter>
             <div className="min-h-screen">
                 <Header />
-                <main className="container mx-auto px-4 pt-20">
+                <NavigationBar />
+                <main className="container mx-auto px-20 pt-20">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                     </Routes>

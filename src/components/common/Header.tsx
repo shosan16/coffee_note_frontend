@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import coffeeIcon from '@/assets/coffee_icon.svg';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const Header = () => {
     return (
-        <header className="fixed left-0 right-0 top-0 z-10 bg-gray-300">
+        <header className="fixed left-0 right-0 top-0 z-10 bg-white">
             <div className="container mx-auto px-4">
                 <nav className="flex items-center justify-between py-4">
                     <NavLink
@@ -13,21 +14,13 @@ export const Header = () => {
                         <img src={coffeeIcon} />
                         <span>Coffee Note</span>
                     </NavLink>
-                    <ul className="flex space-x-5">
+                    <ul className="flex flex-row gap-x-5">
                         <li>
-                            <NavLink
-                                className="transition-all duration-300 hover:text-green-900"
-                                to="/recipes"
-                            >
-                                Recipe List
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                className="transition-all duration-300 hover:text-green-900"
-                                to="/mypage"
-                            >
-                                My Page
+                            <NavLink to={'/mypage'}>
+                                <Avatar className="h-9 w-9">
+                                    <AvatarImage src="https://github.com/shadcn.png" />
+                                    <AvatarFallback></AvatarFallback>
+                                </Avatar>
                             </NavLink>
                         </li>
                     </ul>
