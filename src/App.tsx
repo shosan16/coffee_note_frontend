@@ -16,17 +16,9 @@ function App() {
                 <main className="container mx-auto px-20 pt-20">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                    </Routes>
-                    <Routes>
                         <Route path="/recipes" element={<AllRecipesPage />} />
-                    </Routes>
-                    <Routes>
                         <Route path="/mypage" element={<MyPage />} />
-                    </Routes>
-                    <Routes>
                         <Route path="/groups" element={<RecipeGroupPage />} />
-                    </Routes>
-                    <Routes>
                         <Route
                             path="/groups/:group_id"
                             element={<GroupRecipesPage />}

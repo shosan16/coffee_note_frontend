@@ -2,7 +2,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
@@ -16,7 +15,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 
-import { ThumbsUp, Bookmark, Bean, Droplet } from 'lucide-react';
+import { Bean, Droplet } from 'lucide-react';
 import { Badge } from '../ui/badge';
 
 interface RecipeStep {
@@ -33,13 +32,6 @@ interface CoffeeRecipe {
     grindSize: string;
     totalWaterAmount: string;
     steps: RecipeStep[];
-    isLiked: boolean;
-    isBookmarked: boolean;
-}
-
-interface CoffeeRecipeCardProps extends CoffeeRecipe {
-    onLikeToggle: () => void;
-    onBookmarkToggle: () => void;
 }
 
 export const CoffeeRecipeCard = ({
@@ -50,11 +42,7 @@ export const CoffeeRecipeCard = ({
     grindSize,
     totalWaterAmount,
     steps,
-    isLiked,
-    isBookmarked,
-    onLikeToggle,
-    onBookmarkToggle,
-}: CoffeeRecipeCardProps) => {
+}: CoffeeRecipe) => {
     return (
         <Card className="container m-auto">
             <CardHeader>
@@ -95,22 +83,6 @@ export const CoffeeRecipeCard = ({
                     </TableBody>
                 </Table>
             </CardContent>
-            <CardFooter className="mx-3 flex flex-row justify-end gap-5">
-                <button onClick={() => onLikeToggle()}>
-                    <ThumbsUp
-                        color="black"
-                        fill={isLiked ? 'black' : 'none'}
-                        size={20}
-                    />
-                </button>
-                <button onClick={() => onBookmarkToggle()}>
-                    <Bookmark
-                        color="black"
-                        fill={isBookmarked ? 'black' : 'none'}
-                        size={20}
-                    />
-                </button>
-            </CardFooter>
         </Card>
     );
 };
