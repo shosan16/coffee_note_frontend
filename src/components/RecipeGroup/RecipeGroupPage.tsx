@@ -54,7 +54,7 @@ export default function RecipeGroupPage() {
             <h2 className="mb-6 text-3xl font-bold">Coffee Recipe Groups</h2>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {groups.map((group) => (
-                    <Link to={`/group/${group.id}`} key={group.id}>
+                    <Link to={`/groups/${group.id}`} key={group.id}>
                         <Card
                             key={group.id}
                             className="h-full w-full cursor-pointer hover:bg-gray-50"
@@ -85,7 +85,7 @@ export default function RecipeGroupPage() {
                         </Card>
                     </Link>
                 ))}
-                <Link to="/group/0" key="0">
+                <Link to="/groups/0" key="0">
                     <Card
                         key={0}
                         className="h-full w-full cursor-pointer hover:bg-gray-50"
