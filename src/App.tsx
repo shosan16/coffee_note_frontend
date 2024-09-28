@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './components/Home/HomePage';
-import { RecipeListPage } from './components/RecipeList/RecipeListPage';
+import { AllRecipesPage } from './components/AllRecipes/AllRecipesPage';
 import { Header } from './components/common/Header';
 import { NavigationBar } from './components/common/NavigationBar';
 import { MyPage } from './components/Mypage/Mypage';
@@ -17,16 +17,13 @@ function App() {
                         <Route path="/" element={<HomePage />} />
                     </Routes>
                     <Routes>
-                        <Route path="/recipes" element={<RecipeListPage />} />
+                        <Route path="/recipes" element={<AllRecipesPage />} />
                     </Routes>
                     <Routes>
                         <Route path="/mypage" element={<MyPage />} />
                     </Routes>
                     <Routes>
-                        <Route
-                            path="/recipes/groups"
-                            element={<RecipeGroupPage />}
-                        />
+                        <Route path="/groups" element={<RecipeGroupPage />} />
                     </Routes>
                 </main>
             </div>

@@ -5,6 +5,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 interface RecipeGroup {
     id: string;
@@ -25,10 +26,7 @@ export default function RecipeGroupPage() {
         },
         {
             id: '2',
-            name: 'Espresso',
-            description: 'Espresso-based recipes',
-            bean: 'Dark roast',
-            equipment: 'Espresso machine',
+            name: 'Hot',
         },
         {
             id: '3',
@@ -44,21 +42,22 @@ export default function RecipeGroupPage() {
         },
         {
             id: '5',
-            name: 'Hot',
+            name: 'Espresso',
+            description: 'Espresso-based recipes',
+            bean: 'Dark roast',
+            equipment: 'Espresso machine',
         },
     ];
 
     return (
         <div className="container mx-auto space-y-8 p-4">
-            <>
-                <h2 className="mb-6 text-3xl font-bold">
-                    Coffee Recipe Groups
-                </h2>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {groups.map((group) => (
+            <h2 className="mb-6 text-3xl font-bold">Coffee Recipe Groups</h2>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {groups.map((group) => (
+                    <Link to={`/recipes/group/${group.id}`} key={group.id}>
                         <Card
                             key={group.id}
-                            className="cursor-pointer hover:bg-gray-50"
+                            className="h-full w-full cursor-pointer hover:bg-gray-50"
                         >
                             <CardHeader>
                                 <CardTitle>{group.name}</CardTitle>
@@ -84,17 +83,22 @@ export default function RecipeGroupPage() {
                                 </CardContent>
                             )}
                         </Card>
-                    ))}
-                </div>
-                <Card key={0} className="cursor-pointer hover:bg-gray-50">
-                    <CardHeader>
-                        <CardTitle>Others</CardTitle>
-                        <CardDescription>
-                            Recipes that do not belong to a group
-                        </CardDescription>
-                    </CardHeader>
-                </Card>
-            </>
+                    </Link>
+                ))}
+                <Link to="/recipes/group/0" key="0">
+                    <Card
+                        key={0}
+                        className="h-full w-full cursor-pointer hover:bg-gray-50"
+                    >
+                        <CardHeader>
+                            <CardTitle>Others</CardTitle>
+                            <CardDescription>
+                                Recipes that do not belong to a group
+                            </CardDescription>
+                        </CardHeader>
+                    </Card>
+                </Link>
+            </div>
         </div>
     );
 }

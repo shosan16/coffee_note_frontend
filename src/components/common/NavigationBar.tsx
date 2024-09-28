@@ -12,7 +12,7 @@ import {
 
 const navItems = [
     { name: 'Recipes', icon: ReceiptText, href: '/recipes' },
-    { name: 'Groups', icon: Group, href: '/recipes/groups' },
+    { name: 'Groups', icon: Group, href: '/groups' },
 ];
 
 export const NavigationBar = () => {
