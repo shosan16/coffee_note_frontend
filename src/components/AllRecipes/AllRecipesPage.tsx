@@ -22,7 +22,7 @@ interface CoffeeRecipe {
     isBookmarked: boolean;
 }
 
-export const RecipeListPage = () => {
+export const AllRecipesPage = () => {
     const recipeList: CoffeeRecipe[] = [
         {
             id: '1',
