@@ -1,4 +1,4 @@
-import { ReceiptText } from 'lucide-react';
+import { ReceiptText, Group } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 import { cn } from '@/lib/utils';
@@ -10,7 +10,10 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip';
 
-const navItems = [{ name: 'Recipes', icon: ReceiptText, href: '/recipes' }];
+const navItems = [
+    { name: 'Recipes', icon: ReceiptText, href: '/recipes' },
+    { name: 'Groups', icon: Group, href: '/recipes/groups' },
+];
 
 export const NavigationBar = () => {
     return (

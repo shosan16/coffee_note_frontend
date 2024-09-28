@@ -4,6 +4,7 @@ import { RecipeListPage } from './components/RecipeList/RecipeListPage';
 import { Header } from './components/common/Header';
 import { NavigationBar } from './components/common/NavigationBar';
 import { MyPage } from './components/Mypage/Mypage';
+import RecipeGroupPage from './components/RecipeGroup/RecipeGroupPage';
 
 function App() {
     return (
@@ -20,6 +21,12 @@ function App() {
                     </Routes>
                     <Routes>
                         <Route path="/mypage" element={<MyPage />} />
+                    </Routes>
+                    <Routes>
+                        <Route
+                            path="/recipes/groups"
+                            element={<RecipeGroupPage />}
+                        />
                     </Routes>
                 </main>
             </div>
