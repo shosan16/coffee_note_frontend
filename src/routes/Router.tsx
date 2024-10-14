@@ -1,10 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage } from '../components/Home/HomePage';
-import { AllRecipesPage } from '../components/AllRecipes/AllRecipesPage';
-
-import { MyPage } from '@/components/Mypage/Mypage';
-import { RecipeGroupPage } from '@/components/RecipeGroup/RecipeGroupPage';
-import { GroupRecipesPage } from '@/components/GroupRecipes/GroupRecipesPage';
+import { HomePage } from '@/features/home/HomePage';
+import { AllRecipesPage } from '@/features/all-recipes/AllRecipesPage';
+import { MyPage } from '@/features/my-page/MyPage';
+import { GroupPage } from '@/features/group/GroupPage';
+import { GroupRecipesPage } from '@/features/group-recipes/GroupRecipesPage';
 
 export const Router = () => {
     return (
@@ -12,7 +11,7 @@ export const Router = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes" element={<AllRecipesPage />} />
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/groups" element={<RecipeGroupPage />} />
+            <Route path="/groups" element={<GroupPage />} />
             <Route path="/groups/:group_id" element={<GroupRecipesPage />} />
         </Routes>
     );

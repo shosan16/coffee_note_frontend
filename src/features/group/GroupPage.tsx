@@ -15,7 +15,7 @@ interface RecipeGroup {
     equipment?: string;
 }
 
-export const RecipeGroupPage = () => {
+export const GroupPage = () => {
     const groups: RecipeGroup[] = [
         {
             id: '1',

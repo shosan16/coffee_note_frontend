@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/table';
 
 import { ThumbsUp, Bookmark, Bean, Droplet } from 'lucide-react';
-import { Badge } from '../ui/badge';
+import { Badge } from '@/components/ui/badge';
 
 interface RecipeStep {
     time: string;
