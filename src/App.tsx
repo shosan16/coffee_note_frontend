@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
-import { Header } from './components/common/Header';
+import { Header } from '@/components/layout/Header';
 import { Router } from './routes/Router';
-import { NavigationBar } from './components/common/NavigationBar';
+import { NavigationBar } from '@/components/layout/NavigationBar';
 
 function App() {
     return (
