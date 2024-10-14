@@ -15,7 +15,7 @@ interface RecipeGroup {
     equipment?: string;
 }
 
-export default function RecipeGroupPage() {
+export const RecipeGroupPage = () => {
     const groups: RecipeGroup[] = [
         {
             id: '1',
@@ -101,4 +101,4 @@ export default function RecipeGroupPage() {
             </div>
         </div>
     );
-}
+};
