@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Clock } from 'lucide-react';
@@ -84,8 +82,8 @@ export const TimeField: React.FC<TimeFieldProps> = ({
                                                 className={`cursor-pointer rounded-md p-2 transition-colors ${
                                                     minutes ===
                                                     parseInt(minute, 10)
-                                                        ? 'bg-neutral-500 font-medium text-primary-foreground'
-                                                        : 'hover:bg-muted'
+                                                        ? 'bg-gray-600 font-medium text-primary-foreground'
+                                                        : 'hover:bg-gray-200'
                                                 }`}
                                                 onClick={() =>
                                                     handleMinuteChange(minute)
@@ -115,8 +113,8 @@ export const TimeField: React.FC<TimeFieldProps> = ({
                                                 className={`cursor-pointer rounded-md p-2 transition-colors ${
                                                     seconds ===
                                                     parseInt(second, 10)
-                                                        ? 'bg-neutral-500 font-medium text-primary-foreground'
-                                                        : 'hover:bg-muted'
+                                                        ? 'bg-gray-600 font-medium text-primary-foreground'
+                                                        : 'hover:bg-gray-200'
                                                 }`}
                                                 onClick={() =>
                                                     handleSecondChange(second)
