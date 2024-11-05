@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { StepsInput } from './StepsInput';
+import { StepsInput } from '@/features/my-recipes/create-recipe/steps-input/StepsInput';
 
 interface Step {
     minutes: number;

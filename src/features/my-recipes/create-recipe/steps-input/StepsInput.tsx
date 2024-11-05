@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Trash2 } from 'lucide-react';
-import { TimeField } from './TimeField';
+import { TimeField } from '@/features/my-recipes/create-recipe/steps-input//TimeField';
 
 interface Step {
     minutes: number;
