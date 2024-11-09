@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Bean, Droplet, Scale } from 'lucide-react';
+
 import { StepsInput } from '@/features/my-recipes/create-recipe/steps-input/StepsInput';
+import { AmountInput } from '@/features/my-recipes/create-recipe/amount-input/AmountInput';
+import { Separator } from '@/components/ui/separator';
 
 interface Step {
     minutes: number;
@@ -15,14 +19,22 @@ interface Step {
 
 export const CreateRecipe: React.FC = () => {
     const [title, setTitle] = useState('');
-    const [coffeeAmount, setCoffeeAmount] = useState('0');
-    const [waterAmount, setWaterAmount] = useState('0');
+    const [ratio, setRatio] = useState('1:15.0');
+    const [coffeeAmount, setCoffeeAmount] = useState(15);
+    const [waterAmount, setWaterAmount] = useState(200);
     const [roastLevel, setRoastLevel] = useState<string>('Light');
     const [grindLevel, setGrindLevel] = useState<string>('Light');
     const [description, setDescription] = useState('');
     const [steps, setSteps] = useState<Step[]>([
         { minutes: 0, seconds: 0, action: '' },
     ]);
+
+    useEffect(() => {
+        if (coffeeAmount > 0) {
+            const calculatedRatio = (waterAmount / coffeeAmount).toFixed(1);
+            setRatio(`1:${calculatedRatio}`);
+        }
+    }, [coffeeAmount, waterAmount]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -43,7 +55,7 @@ export const CreateRecipe: React.FC = () => {
                 <CardTitle>Register Coffee Recipe</CardTitle>
             </CardHeader>
             <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     {/* タイトル */}
                     <div className="space-y-2">
                         <Label htmlFor="title">Title</Label>
@@ -56,36 +68,46 @@ export const CreateRecipe: React.FC = () => {
                     </div>
 
                     {/* コーヒー豆と水の量 */}
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="coffeeAmount">
-                                Coffee Amount (g)
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <div className="space-y-2 sm:col-span-2 lg:col-span-1">
+                            <Label className="flex items-center gap-2">
+                                <Scale className="h-4 w-4" />
+                                Ratio
                             </Label>
-                            <Input
-                                id="coffeeAmount"
-                                type="number"
+                            <div className="text-2xl font-bold text-primary">
+                                {ratio}
+                            </div>
+                        </div>
+                        <div className="space-y-6">
+                            <AmountInput
+                                label="Bean"
                                 value={coffeeAmount}
-                                onChange={(e) =>
-                                    setCoffeeAmount(e.target.value)
-                                }
-                                required
-                                min="0"
+                                onChange={setCoffeeAmount}
+                                max={50}
+                                step={0.1}
+                                quickAdjustValues={[15, 20, 25, 30, 35, 40]}
+                                icon={<Bean className="h-4 w-4 text-primary" />}
+                                allowDecimal={true}
                             />
                         </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="waterAmount">
-                                Water Amount (g)
-                            </Label>
-                            <Input
-                                id="waterAmount"
-                                type="number"
+                        <div className="space-y-6">
+                            <AmountInput
+                                label="Water"
                                 value={waterAmount}
-                                onChange={(e) => setWaterAmount(e.target.value)}
-                                required
-                                min="0"
+                                onChange={setWaterAmount}
+                                max={1000}
+                                step={5}
+                                quickAdjustValues={[
+                                    150, 200, 250, 300, 350, 400,
+                                ]}
+                                icon={
+                                    <Droplet className="h-4 w-4 text-primary" />
+                                }
                             />
                         </div>
                     </div>
+
+                    <Separator />
 
                     {/* 焙煎レベル */}
                     <div className="space-y-2">

@@ -41,8 +41,8 @@ export const StepsInput: React.FC<StepsInputProps> = ({ steps, setSteps }) => {
     };
 
     return (
-        <div className="w-full max-w-md space-y-4 p-4">
-            <h2 className="text-2xl font-bold">Steps</h2>
+        <div className="w-full max-w-md space-y-4">
+            <span className="font-bold">Steps</span>
             <div className="space-y-4">
                 {steps.map((step, index) => (
                     <div key={index} className="flex items-center space-x-2">
