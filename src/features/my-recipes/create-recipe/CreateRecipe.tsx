@@ -20,8 +20,8 @@ interface Step {
 export const CreateRecipe: React.FC = () => {
     const [title, setTitle] = useState('');
     const [ratio, setRatio] = useState('1:15.0');
-    const [coffeeAmount, setCoffeeAmount] = useState(15);
-    const [waterAmount, setWaterAmount] = useState(200);
+    const [coffeeAmount, setCoffeeAmount] = useState(1);
+    const [waterAmount, setWaterAmount] = useState(0);
     const [roastLevel, setRoastLevel] = useState<string>('Light');
     const [grindLevel, setGrindLevel] = useState<string>('Light');
     const [description, setDescription] = useState('');

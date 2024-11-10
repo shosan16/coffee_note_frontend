@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -34,20 +34,26 @@ export const AmountInput = ({
 }: AmountInputProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState(formatValue(value));
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    function formatValue(val: number): string {
+    function formatValue(val: number | null | undefined): string {
+        if (val === null || val === undefined || isNaN(val)) {
+            return '0';
+        }
         return allowDecimal ? val.toFixed(1) : val.toString();
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            handleValueChange(parseFloat(inputValue));
+            const parsed = parseFloat(inputValue);
+            handleValueChange(isNaN(parsed) ? 0 : parsed);
             setIsOpen(false);
         }
     };
 
     const handleValueChange = (newValue: number) => {
-        const clampedValue = Math.min(Math.max(0, newValue), max);
+        const valueToUse = isNaN(newValue) ? 0 : newValue;
+        const clampedValue = Math.min(Math.max(0, valueToUse), max);
         const finalValue = allowDecimal
             ? Number(clampedValue.toFixed(1))
             : Math.round(clampedValue);
@@ -60,20 +66,39 @@ export const AmountInput = ({
     };
 
     const handleInputBlur = () => {
-        handleValueChange(parseFloat(inputValue));
+        const parsed = parseFloat(inputValue);
+        handleValueChange(isNaN(parsed) ? 0 : parsed);
     };
 
     useEffect(() => {
         setInputValue(formatValue(value));
     }, [value, allowDecimal]);
 
+    useEffect(() => {
+        if (isOpen) {
+            setTimeout(() => {
+                inputRef.current?.focus();
+                inputRef.current?.select();
+            }, 0);
+        }
+    }, [isOpen]);
+
+    const focusInput = () => {
+        inputRef.current?.focus();
+    };
+
+    const handleQuickAdjust = (quickValue: number) => {
+        handleValueChange(quickValue);
+        focusInput();
+    };
+
     return (
         <div className="space-y-2">
             <div className="flex items-center gap-2">
                 {icon}
-                <Label>{label}</Label>
+                <Label htmlFor={`amount-input-${label}`}>{label}</Label>
             </div>
-            <Popover open={isOpen} onOpenChange={setIsOpen}>
+            <Popover open={isOpen} onOpenChange={setIsOpen} modal={false}>
                 <PopoverTrigger asChild>
                     <Button
                         variant="outline"
@@ -99,6 +124,8 @@ export const AmountInput = ({
                                 </Button>
                                 <div className="relative">
                                     <Input
+                                        id={`amount-input-${label}`}
+                                        ref={inputRef}
                                         type="number"
                                         value={inputValue}
                                         onChange={handleInputChange}
@@ -143,23 +170,24 @@ export const AmountInput = ({
                             </div>
 
                             <div className="flex flex-wrap gap-2">
-                                {quickAdjustValues.map((quickValue) => (
-                                    <Button
-                                        key={quickValue}
-                                        variant={
-                                            value === quickValue
-                                                ? 'default'
-                                                : 'outline'
-                                        }
-                                        size="sm"
-                                        onClick={() =>
-                                            handleValueChange(quickValue)
-                                        }
-                                        className="flex-1"
-                                    >
-                                        {formatValue(quickValue)}g
-                                    </Button>
-                                ))}
+                                {Array.isArray(quickAdjustValues) &&
+                                    quickAdjustValues.map((quickValue) => (
+                                        <Button
+                                            key={quickValue}
+                                            variant={
+                                                value === quickValue
+                                                    ? 'default'
+                                                    : 'outline'
+                                            }
+                                            size="sm"
+                                            onClick={() =>
+                                                handleQuickAdjust(quickValue)
+                                            }
+                                            className="flex-1"
+                                        >
+                                            {formatValue(quickValue)}g
+                                        </Button>
+                                    ))}
                             </div>
                         </CardContent>
                     </Card>
