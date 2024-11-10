@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Trash2 } from 'lucide-react';
-import { TimeField } from '@/features/my-recipes/create-recipe/steps-input//TimeField';
+import { TimeField } from '@/features/my-recipes/create-recipe/steps-input/TimeField';
 
 interface Step {
     minutes: number;
@@ -55,20 +55,21 @@ export const StepsInput: React.FC<StepsInputProps> = ({ steps, setSteps }) => {
                             }}
                             className="w-[120px]"
                         />
-                        <Input
+                        <Textarea
                             placeholder="Action"
                             value={step.action}
                             onChange={(e) =>
                                 updateStep(index, 'action', e.target.value)
                             }
-                            className="flex-grow"
+                            className="min-h-[2.5rem] flex-grow resize-none"
+                            rows={1}
                         />
                         {steps.length > 1 && (
                             <Button
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => removeStep(index)}
-                                className="h-10 w-10 flex-shrink-0"
+                                className="h-10 w-10"
                             >
                                 <Trash2 className="h-4 w-4" />
                             </Button>
