@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,12 +15,12 @@ interface TimeFieldProps {
     className?: string;
 }
 
-export const TimeField: React.FC<TimeFieldProps> = ({
+export const TimeField = ({
     minutes,
     seconds,
     onChange,
     className,
-}) => {
+}: TimeFieldProps) => {
     const generateTimeOptions = (max: number, step: number = 1) => {
         return Array.from({ length: Math.ceil(max / step) }, (_, i) =>
             (i * step).toString().padStart(2, '0'),
