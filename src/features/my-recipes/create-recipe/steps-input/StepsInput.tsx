@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Trash2 } from 'lucide-react';
 import { TimeField } from '@/features/my-recipes/create-recipe/steps-input/TimeField';
+import { Label } from '@/components/ui/label';
 
 interface Step {
     minutes: number;
@@ -41,9 +42,9 @@ export const StepsInput = ({ steps, setSteps }: StepsInputProps) => {
     };
 
     return (
-        <div className="w-full space-y-4">
-            <span className="font-bold">Steps</span>
-            <div className="space-y-4">
+        <div className="w-full space-y-2">
+            <Label>Steps</Label>
+            <div className="space-y-3">
                 {steps.map((step, index) => (
                     <div key={index} className="flex items-center space-x-2">
                         <TimeField
