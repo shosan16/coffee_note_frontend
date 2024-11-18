@@ -15,7 +15,7 @@ interface StepsInputProps {
     setSteps: Dispatch<SetStateAction<Step[]>>;
 }
 
-export const StepsInput: React.FC<StepsInputProps> = ({ steps, setSteps }) => {
+export const StepsInput = ({ steps, setSteps }: StepsInputProps) => {
     const addStep = () => {
         setSteps([...steps, { minutes: 0, seconds: 0, action: '' }]);
     };
@@ -41,7 +41,7 @@ export const StepsInput: React.FC<StepsInputProps> = ({ steps, setSteps }) => {
     };
 
     return (
-        <div className="w-full max-w-md space-y-4">
+        <div className="w-full space-y-4">
             <span className="font-bold">Steps</span>
             <div className="space-y-4">
                 {steps.map((step, index) => (
