@@ -101,6 +101,7 @@ export const AmountInput = ({
             <Popover open={isOpen} onOpenChange={setIsOpen} modal={false}>
                 <PopoverTrigger asChild>
                     <Button
+                        id={`amount-input-${label}`}
                         variant="outline"
                         className="w-full justify-between text-left font-normal"
                     >
@@ -124,7 +125,6 @@ export const AmountInput = ({
                                 </Button>
                                 <div className="relative">
                                     <Input
-                                        id={`amount-input-${label}`}
                                         ref={inputRef}
                                         type="number"
                                         value={inputValue}

@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { Bean, Droplet, Scale } from 'lucide-react';
 
 import { StepsInput } from '@/features/my-recipes/create-recipe/steps-input/StepsInput';
 import { AmountInput } from '@/features/my-recipes/create-recipe/amount-input/AmountInput';
-import { Separator } from '@/components/ui/separator';
 
 interface Step {
     minutes: number;
@@ -18,13 +23,13 @@ interface Step {
 
 export const CreateRecipe: React.FC = () => {
     const [title, setTitle] = useState('');
-    const [ratio, setRatio] = useState('1:15.0');
-    const [coffeeAmount, setCoffeeAmount] = useState(1);
+    const [ratio, setRatio] = useState('0:0');
+    const [coffeeAmount, setCoffeeAmount] = useState(0);
     const [waterAmount, setWaterAmount] = useState(0);
     const [dripperName, setDripperName] = useState<string>('Light');
     const [grinderName, setGrinderName] = useState<string>('Light');
-    const [roastLevel, setRoastLevel] = useState<string>('Light');
-    const [grindLevel, setGrindLevel] = useState<string>('Fine grind');
+    const [roastLevel, setRoastLevel] = useState<string>('');
+    const [grindLevel, setGrindLevel] = useState<string>('');
     const [description, setDescription] = useState('');
     const [steps, setSteps] = useState<Step[]>([
         { minutes: 0, seconds: 0, action: '' },
@@ -46,6 +51,7 @@ export const CreateRecipe: React.FC = () => {
             dripperName,
             grinderName,
             roastLevel,
+            grindLevel,
             description,
             steps,
         });
@@ -60,9 +66,8 @@ export const CreateRecipe: React.FC = () => {
                     <Label htmlFor="title">Title</Label>
                     <Input
                         id="title"
-                        value="Title"
+                        value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        required
                     />
                 </div>
 
@@ -104,85 +109,70 @@ export const CreateRecipe: React.FC = () => {
 
                 {/* ドリッパー・グラインダー */}
                 <div className="grid gap-6 sm:grid-cols-2">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                         <Label htmlFor="dripper">Dripper</Label>
                         <Input
                             type="text"
                             id="dripper"
-                            placeholder="Dripper"
                             onChange={(e) => setDripperName(e.target.value)}
                         />
                     </div>
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                         <Label htmlFor="grinder">Grinder</Label>
                         <Input
                             type="text"
                             id="grinder"
-                            placeholder="Grinder"
                             onChange={(e) => setGrinderName(e.target.value)}
                         />
                     </div>
                 </div>
 
-                <Separator />
+                <div className="grid gap-6 sm:grid-cols-2">
+                    {/* 焙煎度 */}
+                    <div className="space-y-2">
+                        <Label htmlFor="roastLevel">焙煎度</Label>
+                        <Select
+                            value={roastLevel}
+                            onValueChange={(value) => setRoastLevel(value)}
+                        >
+                            <SelectTrigger id="roastLevel">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="1">
+                                    ライトロースト
+                                </SelectItem>
+                                <SelectItem value="2">
+                                    ミディアムロースト
+                                </SelectItem>
+                                <SelectItem value="3">
+                                    ダークロースト
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
 
-                {/* 焙煎レベル */}
-                <div className="space-y-2">
-                    <Label>Roast Level</Label>
-                    <RadioGroup
-                        value={roastLevel}
-                        onValueChange={setRoastLevel}
-                        className="flex space-x-4"
-                    >
-                        {['Light', 'Medium', 'Dark'].map((level) => (
-                            <div
-                                key={level}
-                                className="flex items-center space-x-2"
-                            >
-                                <RadioGroupItem
-                                    value={level}
-                                    id={`roast-${level.toLowerCase()}`}
-                                />
-                                <Label
-                                    className="hover:cursor-pointer"
-                                    htmlFor={`roast-${level.toLowerCase()}`}
-                                >
-                                    {level}
-                                </Label>
-                            </div>
-                        ))}
-                    </RadioGroup>
+                    {/* 挽き目 */}
+                    <div className="space-y-2">
+                        <Label htmlFor="grindLevel">挽き目</Label>
+                        <Select
+                            value={grindLevel}
+                            onValueChange={(value) => setGrindLevel(value)}
+                        >
+                            <SelectTrigger id="grindLevel">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="1">細挽き</SelectItem>
+                                <SelectItem value="2">中挽き</SelectItem>
+                                <SelectItem value="3">粗挽き</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
 
-                {/* 挽き目レベル */}
-                <div className="space-y-2">
-                    <Label>Grind Level</Label>
-                    <RadioGroup
-                        value={grindLevel}
-                        onValueChange={setGrindLevel}
-                        className="flex space-x-4"
-                    >
-                        {['Fine grind', 'Medium grind', 'Coarse grind'].map(
-                            (level) => (
-                                <div
-                                    key={level}
-                                    className="flex items-center space-x-2"
-                                >
-                                    <RadioGroupItem
-                                        value={level}
-                                        id={`grind-${level.toLowerCase()}`}
-                                    />
-                                    <Label
-                                        className="hover:cursor-pointer"
-                                        htmlFor={`grind-${level.toLowerCase()}`}
-                                    >
-                                        {level}
-                                    </Label>
-                                </div>
-                            ),
-                        )}
-                    </RadioGroup>
-                </div>
+                {/* ステップ */}
+                <StepsInput steps={steps} setSteps={setSteps} />
 
                 {/* 説明 */}
                 <div className="space-y-2">
@@ -195,9 +185,6 @@ export const CreateRecipe: React.FC = () => {
                         placeholder="Describe your recipe..."
                     />
                 </div>
-
-                {/* ステップ */}
-                <StepsInput steps={steps} setSteps={setSteps} />
 
                 {/* 提出ボタン */}
                 <Button type="submit" className="w-full">
