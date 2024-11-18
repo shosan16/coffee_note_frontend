@@ -5,7 +5,7 @@ import { CreateRecipe } from '@/features/my-recipes/create-recipe/CreateRecipe';
 
 export const MyRecipesPage = () => {
     return (
-        <Tabs defaultValue="recipes" className="w-full">
+        <Tabs defaultValue="recipes" className="mx-auto w-full max-w-screen-lg">
             <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger
                     value="new-recipe"

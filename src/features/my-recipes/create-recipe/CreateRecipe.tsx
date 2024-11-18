@@ -53,14 +53,14 @@ export const CreateRecipe: React.FC = () => {
     };
 
     return (
-        <div className="mx-auto w-full">
+        <div className="mx-auto w-full max-w-screen-lg">
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* タイトル */}
                 <div className="space-y-2">
                     <Label htmlFor="title">Title</Label>
                     <Input
                         id="title"
-                        value={title}
+                        value="Title"
                         onChange={(e) => setTitle(e.target.value)}
                         required
                     />
