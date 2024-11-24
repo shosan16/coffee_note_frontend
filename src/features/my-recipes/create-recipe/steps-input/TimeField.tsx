@@ -1,12 +1,19 @@
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 type TimeField = {
     minutes: number;
@@ -19,7 +26,22 @@ type TimeFieldProps = TimeField & {
 };
 
 export const TimeField = (props: TimeFieldProps) => {
-    const { minutes, seconds, onChange, className } = props;
+    const { minutes, seconds, className, onChange } = props;
+    const [localMinutes, setLocalMinutes] = useState(() =>
+        minutes !== undefined ? minutes.toString().padStart(2, '0') : '00',
+    );
+    const [localSeconds, setLocalSeconds] = useState(() =>
+        seconds !== undefined ? seconds.toString().padStart(2, '0') : '00',
+    );
+
+    useEffect(() => {
+        setLocalMinutes(
+            minutes !== undefined ? minutes.toString().padStart(2, '0') : '00',
+        );
+        setLocalSeconds(
+            seconds !== undefined ? seconds.toString().padStart(2, '0') : '00',
+        );
+    }, [minutes, seconds]);
 
     const generateTimeOptions = (max: number, step: number = 1) => {
         return Array.from({ length: Math.ceil(max / step) }, (_, i) =>
@@ -27,17 +49,17 @@ export const TimeField = (props: TimeFieldProps) => {
         );
     };
 
-    const minuteOptions = generateTimeOptions(60);
+    const minuteOptions = generateTimeOptions(16);
     const secondOptions = generateTimeOptions(60, 5);
 
     const handleMinuteChange = (value: string) => {
-        const newMinutes = parseInt(value, 10);
-        onChange(newMinutes, seconds);
+        setLocalMinutes(value);
+        onChange(parseInt(value, 10), seconds !== undefined ? seconds : 0);
     };
 
     const handleSecondChange = (value: string) => {
-        const newSeconds = parseInt(value, 10);
-        onChange(minutes, newSeconds);
+        setLocalSeconds(value);
+        onChange(minutes !== undefined ? minutes : 0, parseInt(value, 10));
     };
 
     return (
@@ -48,82 +70,70 @@ export const TimeField = (props: TimeFieldProps) => {
                     className={`w-[120px] justify-start text-left font-normal ${className}`}
                 >
                     <Clock className="mr-2 h-4 w-4" />
-                    {minutes.toString().padStart(2, '0')}:
-                    {seconds.toString().padStart(2, '0')}
+                    {localMinutes}:{localSeconds}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-80 p-0">
+            <PopoverContent className="w-80 p-0" align="start" side="bottom">
                 <Card className="border-0">
                     <CardContent className="p-3">
-                        <div
-                            className="mb-4 text-center text-2xl font-bold text-primary"
-                            aria-live="polite"
-                        >
-                            {minutes.toString().padStart(2, '0')}:
-                            {seconds.toString().padStart(2, '0')}
-                        </div>
-                        <div className="flex justify-between">
-                            <div className="w-1/2 pr-2">
+                        <div className="flex justify-between space-x-4">
+                            <div className="w-1/2">
                                 <label
-                                    htmlFor="minute-scroll"
+                                    htmlFor="minute-select"
                                     className="mb-1 block text-xs font-medium text-muted-foreground"
                                 >
                                     Minutes
                                 </label>
-                                <ScrollArea
-                                    className="h-40 w-full rounded-md border"
-                                    id="minute-scroll"
+                                <Select
+                                    value={localMinutes}
+                                    onValueChange={handleMinuteChange}
                                 >
-                                    <div className="p-2">
+                                    <SelectTrigger
+                                        id="minute-select"
+                                        className="w-full"
+                                    >
+                                        <SelectValue placeholder="Minutes" />
+                                    </SelectTrigger>
+                                    <SelectContent side="bottom">
                                         {minuteOptions.map((minute) => (
-                                            <div
+                                            <SelectItem
                                                 key={minute}
-                                                className={`cursor-pointer rounded-md p-2 transition-colors ${
-                                                    minutes ===
-                                                    parseInt(minute, 10)
-                                                        ? 'bg-gray-600 font-medium text-primary-foreground'
-                                                        : 'hover:bg-gray-200'
-                                                }`}
-                                                onClick={() =>
-                                                    handleMinuteChange(minute)
-                                                }
+                                                value={minute}
                                             >
                                                 {minute}
-                                            </div>
+                                            </SelectItem>
                                         ))}
-                                    </div>
-                                </ScrollArea>
+                                    </SelectContent>
+                                </Select>
                             </div>
-                            <div className="w-1/2 pl-2">
+                            <div className="w-1/2">
                                 <label
-                                    htmlFor="second-scroll"
+                                    htmlFor="second-select"
                                     className="mb-1 block text-xs font-medium text-muted-foreground"
                                 >
                                     Seconds
                                 </label>
-                                <ScrollArea
-                                    className="h-40 w-full rounded-md border"
-                                    id="second-scroll"
+                                <Select
+                                    value={localSeconds}
+                                    onValueChange={handleSecondChange}
                                 >
-                                    <div className="p-2">
+                                    <SelectTrigger
+                                        id="second-select"
+                                        className="w-full"
+                                    >
+                                        <SelectValue placeholder="Seconds" />
+                                    </SelectTrigger>
+                                    <SelectContent side="bottom">
                                         {secondOptions.map((second) => (
-                                            <div
+                                            <SelectItem
                                                 key={second}
-                                                className={`cursor-pointer rounded-md p-2 transition-colors ${
-                                                    seconds ===
-                                                    parseInt(second, 10)
-                                                        ? 'bg-gray-600 font-medium text-primary-foreground'
-                                                        : 'hover:bg-gray-200'
-                                                }`}
-                                                onClick={() =>
-                                                    handleSecondChange(second)
-                                                }
+                                                value={second}
                                             >
                                                 {second}
-                                            </div>
+                                            </SelectItem>
                                         ))}
-                                    </div>
-                                </ScrollArea>
+                                    </SelectContent>
+                                </Select>
                             </div>
                         </div>
                     </CardContent>

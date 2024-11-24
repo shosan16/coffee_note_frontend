@@ -187,10 +187,22 @@ export const CreateRecipe: React.FC = () => {
                     />
                 </div>
 
-                {/* 提出ボタン */}
-                <Button type="submit" className="w-full">
-                    Register Recipe
-                </Button>
+                {/* アクションボタン */}
+                <div className="flex justify-end space-x-4">
+                    {/* 下書き保存ボタン */}
+                    <Button
+                        type="button"
+                        variant="outline"
+                        // onClick={handleSaveDraft}
+                        className="w-auto px-6"
+                    >
+                        Save
+                    </Button>
+                    {/* 提出ボタン */}
+                    <Button type="submit" className="w-auto px-6">
+                        Submit
+                    </Button>
+                </div>
             </form>
         </div>
     );
