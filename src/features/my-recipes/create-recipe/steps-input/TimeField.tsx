@@ -8,19 +8,19 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover';
 
-type TimeFieldProps = {
+type TimeField = {
     minutes: number;
     seconds: number;
-    onChange: (minutes: number, seconds: number) => void;
     className?: string;
 };
 
-export const TimeField = ({
-    minutes,
-    seconds,
-    onChange,
-    className,
-}: TimeFieldProps) => {
+type TimeFieldProps = TimeField & {
+    onChange: (minutes: number, seconds: number) => void;
+};
+
+export const TimeField = (props: TimeFieldProps) => {
+    const { minutes, seconds, onChange, className } = props;
+
     const generateTimeOptions = (max: number, step: number = 1) => {
         return Array.from({ length: Math.ceil(max / step) }, (_, i) =>
             (i * step).toString().padStart(2, '0'),
