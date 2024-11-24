@@ -9,7 +9,7 @@ function App() {
             <div className="min-h-screen">
                 <Header />
                 <NavigationBar />
-                <main className="container mx-auto px-20 pt-20">
+                <main className="container mx-auto px-20 pb-10 pt-20">
                     <Router />
                 </main>
             </div>
