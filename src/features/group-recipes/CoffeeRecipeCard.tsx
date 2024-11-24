@@ -18,12 +18,12 @@ import {
 import { Bean, Droplet } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-interface RecipeStep {
+type RecipeStep = {
     time: string;
     action: string;
-}
+};
 
-interface CoffeeRecipe {
+type CoffeeRecipe = {
     id: string;
     recipeName: string;
     description?: string;
@@ -32,7 +32,7 @@ interface CoffeeRecipe {
     grindSize: string;
     totalWaterAmount: string;
     steps: RecipeStep[];
-}
+};
 
 export const CoffeeRecipeCard = ({
     recipeName,

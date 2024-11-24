@@ -2,12 +2,12 @@ import { CoffeeRecipeCard } from './CoffeeRecipeCard';
 import { useParams } from 'react-router-dom';
 // import { useParams } from 'react-router-dom';
 
-interface RecipeStep {
+type RecipeStep = {
     time: string;
     action: string;
-}
+};
 
-interface CoffeeRecipe {
+type CoffeeRecipe = {
     id: string;
     recipeName: string;
     description?: string;
@@ -18,7 +18,7 @@ interface CoffeeRecipe {
     totalWaterAmount: string;
     totalTime: string;
     steps: RecipeStep[];
-}
+};
 
 export const GroupRecipesPage = () => {
     const recipeList: CoffeeRecipe[] = [

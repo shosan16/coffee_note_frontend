@@ -8,12 +8,12 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover';
 
-interface TimeFieldProps {
+type TimeFieldProps = {
     minutes: number;
     seconds: number;
     onChange: (minutes: number, seconds: number) => void;
     className?: string;
-}
+};
 
 export const TimeField = ({
     minutes,

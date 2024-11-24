@@ -5,16 +5,16 @@ import { Trash2 } from 'lucide-react';
 import { TimeField } from '@/features/my-recipes/create-recipe/steps-input/TimeField';
 import { Label } from '@/components/ui/label';
 
-interface Step {
+type Step = {
     minutes: number;
     seconds: number;
     action: string;
-}
+};
 
-interface StepsInputProps {
+type StepsInputProps = {
     steps: Step[];
     setSteps: Dispatch<SetStateAction<Step[]>>;
-}
+};
 
 export const StepsInput = ({ steps, setSteps }: StepsInputProps) => {
     const addStep = () => {
