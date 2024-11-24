@@ -101,7 +101,9 @@ export const CreateRecipe: React.FC = () => {
                             onChange={setWaterAmount}
                             max={1000}
                             step={5}
-                            quickAdjustValues={[150, 200, 250, 300, 350, 400]}
+                            quickAdjustValues={[
+                                150, 200, 250, 300, 350, 400, 450, 500, 600,
+                            ]}
                             icon={<Droplet className="h-4 w-4 text-primary" />}
                         />
                     </div>
@@ -182,7 +184,6 @@ export const CreateRecipe: React.FC = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         rows={3}
-                        placeholder="Describe your recipe..."
                     />
                 </div>
 
