@@ -11,10 +11,9 @@ import {
 } from '@/components/ui/popover';
 import { Minus, Plus } from 'lucide-react';
 
-type AmountInputProps = {
+type AmountInput = {
     label: string;
     value: number;
-    onChange: (value: number) => void;
     max: number;
     step: number;
     quickAdjustValues: number[];
@@ -22,16 +21,22 @@ type AmountInputProps = {
     allowDecimal?: boolean;
 };
 
-export const AmountInput = ({
-    label,
-    value,
-    onChange,
-    max,
-    step,
-    quickAdjustValues,
-    icon,
-    allowDecimal = false,
-}: AmountInputProps) => {
+type AmountInputProps = AmountInput & {
+    onChange: (value: number) => void;
+};
+
+export const AmountInput = (props: AmountInputProps) => {
+    const {
+        label,
+        value,
+        max,
+        step,
+        quickAdjustValues,
+        icon,
+        allowDecimal = false,
+        onChange,
+    } = props;
+
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState(formatValue(value));
     const inputRef = useRef<HTMLInputElement>(null);
