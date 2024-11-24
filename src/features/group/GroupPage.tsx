@@ -7,13 +7,13 @@ import {
 } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 
-interface RecipeGroup {
+type RecipeGroup = {
     id: string;
     name: string;
     description?: string;
     bean?: string;
     equipment?: string;
-}
+};
 
 export const GroupPage = () => {
     const groups: RecipeGroup[] = [

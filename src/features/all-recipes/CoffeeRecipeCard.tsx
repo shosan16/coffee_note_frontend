@@ -19,12 +19,12 @@ import {
 import { ThumbsUp, Bookmark, Bean, Droplet } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-interface RecipeStep {
+type RecipeStep = {
     time: string;
     action: string;
-}
+};
 
-interface CoffeeRecipe {
+type CoffeeRecipe = {
     id: string;
     recipeName: string;
     description?: string;
@@ -35,26 +35,28 @@ interface CoffeeRecipe {
     steps: RecipeStep[];
     isLiked: boolean;
     isBookmarked: boolean;
-}
+};
 
-interface CoffeeRecipeCardProps extends CoffeeRecipe {
+type CoffeeRecipeCardProps = CoffeeRecipe & {
     onLikeToggle: () => void;
     onBookmarkToggle: () => void;
-}
+};
 
-export const CoffeeRecipeCard = ({
-    recipeName,
-    description,
-    beanWeight,
-    roastLevel,
-    grindSize,
-    totalWaterAmount,
-    steps,
-    isLiked,
-    isBookmarked,
-    onLikeToggle,
-    onBookmarkToggle,
-}: CoffeeRecipeCardProps) => {
+export const CoffeeRecipeCard = (props: CoffeeRecipeCardProps) => {
+    const {
+        recipeName,
+        description,
+        beanWeight,
+        roastLevel,
+        grindSize,
+        totalWaterAmount,
+        steps,
+        isLiked,
+        isBookmarked,
+        onLikeToggle,
+        onBookmarkToggle,
+    } = props;
+
     return (
         <Card className="container m-auto">
             <CardHeader>

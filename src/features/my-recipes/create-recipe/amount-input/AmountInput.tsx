@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/popover';
 import { Minus, Plus } from 'lucide-react';
 
-interface AmountInputProps {
+type AmountInputProps = {
     label: string;
     value: number;
     onChange: (value: number) => void;
@@ -20,7 +20,7 @@ interface AmountInputProps {
     quickAdjustValues: number[];
     icon: React.ReactNode;
     allowDecimal?: boolean;
-}
+};
 
 export const AmountInput = ({
     label,

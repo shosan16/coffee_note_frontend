@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 import { CoffeeRecipeCard } from './CoffeeRecipeCard';
 
-interface RecipeStep {
+type RecipeStep = {
     time: string;
     action: string;
-}
+};
 
-interface CoffeeRecipe {
+type CoffeeRecipe = {
     id: string;
     recipeName: string;
     description?: string;
@@ -20,7 +20,7 @@ interface CoffeeRecipe {
     steps: RecipeStep[];
     isLiked: boolean;
     isBookmarked: boolean;
-}
+};
 
 export const AllRecipesPage = () => {
     const recipeList: CoffeeRecipe[] = [

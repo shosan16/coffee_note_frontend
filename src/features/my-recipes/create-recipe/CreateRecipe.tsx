@@ -15,11 +15,11 @@ import { Bean, Droplet, Scale } from 'lucide-react';
 import { StepsInput } from '@/features/my-recipes/create-recipe/steps-input/StepsInput';
 import { AmountInput } from '@/features/my-recipes/create-recipe/amount-input/AmountInput';
 
-interface Step {
+type Step = {
     minutes: number;
     seconds: number;
     action: string;
-}
+};
 
 export const CreateRecipe: React.FC = () => {
     const [title, setTitle] = useState('');
